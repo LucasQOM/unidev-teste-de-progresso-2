@@ -31,6 +31,21 @@ class Stringify
      */
     public static function generate($stringJson)
     {
-        // Seu código aqui...
+        $stringJson = json_decode($stringJson, true);
+        $date = new DateTime();
+        $birth = new DateTime($stringJson['birth']);
+
+        for($i=0; $i < count($stringJson['childrens']); $i++){
+            $age[] = $stringJson['childrens'][$i]['age'];
+        }
+
+        $output = [
+            "full_name" => $stringJson['name']. ' '.$stringJson['lastname'],
+            "age" => $date->diff($birth)->y,
+            "childrens" => $i,
+            "childrens_age" => $age
+        ];
+
+        return $output;
     }
 }

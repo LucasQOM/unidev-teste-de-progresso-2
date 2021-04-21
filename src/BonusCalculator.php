@@ -21,8 +21,47 @@ class BonusCalculator
     /**
      * Deve retornar um valor numérico com o total de Bonus do funcionário
      */
+
     public static function calculate($salary, $totalChildren)
     {
-        // Seu código aqui...
+        $bonus = 0;
+
+        if(!is_numeric($salary) || !is_numeric($totalChildren) || $salary < 0 || $totalChildren < 0) {
+            throw new Exception('Apenas valores numéricos são aceitos!');
+        }
+        if($salary >= 10000){
+            $bonus = 0;
+        }else{
+            if($totalChildren == 0){
+                $bonus += 0;
+            }else{
+                if($totalChildren > 0){
+                    if($totalChildren == 1){
+                        $bonus += 0.1;
+                    }
+                    if($totalChildren == 2){
+                        $bonus += 0.2;
+                    }
+                    if($totalChildren >= 3){
+                        $bonus += 0.3;
+                    }
+                }
+            }
+            if($salary > 0 && $salary <= 2000){
+                    $bonus += 0.2;
+            }
+            else{
+                if($salary > 2000 && $salary <= 5000){
+                    $bonus += 0.1;
+            }
+            else{
+                if($salary > 5000 && $salary < 10000){
+                    $bonus +=0.05;
+                    }
+                }
+            }
+        }
+    $salary *= $bonus;
+    return $salary;
     }
 }
